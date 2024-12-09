@@ -1,0 +1,72 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #A4C5C9;
+}
+
+img{
+  display: block;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.title{
+  text-align: center;
+}
+
+.frase-logo{
+  text-align: center;
+}
+
+.form-container{
+  max-width: 300px;
+  padding: 3rm;
+}
+
+.home-register{
+  margin: 50px 60px;
+}
+
+form{
+	display: block;
+	font-size: 20px;
+	margin: 0 0 10px;
+}
+
+.name-register{
+	display: block;
+  font-size: 20px;
+  margin: 10px 0 10px;
+}
+
+.date-register{
+	display: block;
+  font-size: 20px;
+  margin: 10px 0 10px;
+}
+
+.email-register{
+	display: block;
+  font-size: 20px;
+  margin: 10px 0 10px;
+}
+
+.email-register{
+	display: block;
+  font-size: 20px;
+  margin: 10px 0 10px;
+}
+
+.passord-register{
+	display: block;
+  font-size: 20px;
+  margin: 10px 0 10px;
+}
+
+
+
+

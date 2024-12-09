@@ -1,0 +1,15 @@
+﻿Usa react, tailwindCSS (basicamente, vc diz o layout ou componente que precisa e ele te dá o código inteiro bonitão) e Shadcn
+
+com essa stack vc consegue usar isso aqui https://v0.dev/
+
+tailwind é uma biblioteca utilitária para construção de estilos, ele basicamente te dá classes CSS e você não precisa escrever CSS puro
+
+O bootstrap é uma lib de componentes css e javascript, bem coisas prontas
+com o tailwind vc precisa construir
+
+ai com o Shadcn, vc tem todos os componentes prontos, como o bootstrap faz
+e usa o v0 como LLM para te ajudar a montar as telas
+
+isso aqui seria o equivalente ao boostrap mas em react https://ui.shadcn.com/
+
+testa o v0, pede para ele gerar um menu com algumas características para vc
