@@ -67,6 +67,21 @@ form{
   margin: 10px 0 10px;
 }
 
+footer{
+	display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10em;
+  font-size: 90%;
+}
+
+.copyright{
+	font-size: 13px;
+	color: --bs-gray-500;
+	padding: 30px;
+}
+
 
 
 
