@@ -3,3 +3,70 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: rgba(var(--bs-tertiary-bg-rgb),var(--bs-bg-opacity))
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 20px;
+}
+
+.logo-home{
+  margin-bottom: 20px;
+  
+}
+
+.title{
+  text-align: center;
+  margin-top: 30px;
+}
+
+.form-login{
+  max-width: 100%;
+  max-width: 300px;
+}
+
+.form-group{
+  margin-bottom: 15px;
+}
+
+.form-control{
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+.btn-entrar{
+  margin-top: 30px;
+}
+.btn-cadastrar{
+  margin-top: 10px;
+}
+
+footer{
+	display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 10em;
+  font-size: 90%;
+}
+
+.copyright{
+	font-size: 13px;
+	color: --bs-gray-500;
+	padding: 30px;
+}
