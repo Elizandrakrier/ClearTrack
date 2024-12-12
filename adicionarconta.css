@@ -1,5 +1,14 @@
-﻿* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+﻿:root {
+  --primary-color: #A4C5C9;
+  --text-color: #333333;
+  --background-color: #f8f9fa;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

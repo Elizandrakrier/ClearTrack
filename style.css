@@ -1,87 +1,107 @@
-﻿* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+﻿:root {
+  --primary-color: #A4C5C9;
+  --text-color: #333333;
+  --background-color: #f8f9fa;
 }
 
 body {
-  background-color: #A4C5C9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-img{
+.form-container {
+  background-color: var(--background-color);
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.logo-home {
   display: block;
-  margin: 0 auto;
-  margin-top: 100px;
+  margin: 0 auto 1rem;
 }
 
-.title{
+.title {
   text-align: center;
+  color: var(--text-color);
+  font-weight: bold;
 }
 
-.frase-logo{
+.frase-logo {
   text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.form-container{
-  max-width: 300px;
-  padding: 3rm;
+.form-floating {
+  margin-bottom: 1rem;
 }
 
-.home-register{
-  margin: 50px 60px;
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(164, 197, 201, 0.25);
 }
 
-form{
-	display: block;
-	font-size: 16px;
-	margin: 0 0 10px;
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
-.name-register{
-	display: block;
-  font-size: 16px;
-  margin: 10px 0 10px;
+legend {
+  margin-bottom: 0.5rem;
 }
 
-.date-register{
-	display: block;
-  font-size: 16px;
-  margin: 10px 0 10px;
+.form-check-input:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-.email-register{
-	display: block;
-  font-size: 16px;
-  margin: 10px 0 10px;
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
-.email-register{
-	display: block;
-  font-size: 16px;
-  margin: 10px 0 10px;
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #8aadb1;
+  border-color: #8aadb1;
 }
 
-.passord-register{
-	display: block;
-  font-size: 16px;
-  margin: 10px 0 10px;
+.btn a {
+  color: var(--background-color);
+  text-decoration: none;
+  font-weight: bold;
 }
 
-footer{
-	display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin-top: 10em;
-  font-size: 90%;
+.text-body-secondary a {
+  color: var(--text-color);
+  text-decoration: none;
 }
 
-.copyright{
-	font-size: 13px;
-	color: --bs-gray-500;
-	padding: 30px;
+.text-body-secondary a:hover {
+  text-decoration: underline;
 }
 
+footer {
+  margin-top: auto;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
 
+.copyright {
+  font-size: 0.8rem;
+  color: #666;
+}
 
-
+@media (max-width: 576px) {
+  .form-container {
+    max-width: 100%;
+    border-radius: 0;
+  }
+}

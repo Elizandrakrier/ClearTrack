@@ -22,48 +22,53 @@
     <title>Clear Track - Login</title>
   </head>
 
-  <body>
-    <div class="container">
+  <body class="d-flex align-items-center py-4 bg-body-tertiary">
+    <main class="w-100 m-auto form-container">
       <img
         src="logoClearTrack.png"
-        class="logo-home"
+        alt="Logo Clear Track"
+        class="logo-home-login"
         height="auto"
         width="100"
       />
       <h1 class="title h3 mb-3 fw-normal">Clear Track</h1>
 
-      <div class="form-login">
-        <form action="#" method="post">
-          <div class="form-group">
-            <label for="floatingInput">E-mail</label>
+      <form action="#" method="post">
+        <fieldset>
+          <div class="form-floating mb-3">
             <input
               type="email"
-              placeholder="@.com"
-              id="floatingInput"
+              id="email"
+              name="email"
+              placeholder="Digite seu e-mail"
               class="form-control"
               required
             />
-          </div>
-          <div class="form-group">
-            <label for="first-password">Senha</label>
-            <input
-              type="password"
-              placeholder="Digite aqui"
-              id="first-password"
-              class="form-control"
-              required
-            />
+            <label for="email">Seu e-mail</label>
           </div>
 
-          <button type="button" class="btn btn-outline-primary">
+          <div class="form-floating mb-3">
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              class="form-control"
+              required
+            />
+            <label for="senha">Sua senha</label>
+          </div>
+
+          <button type="submit" class="btn-entrar w-100">
             <a href="perfil.html">Entrar</a>
           </button>
-          <button type="button" class="btn btn-outline-primary">
-            <a href="index.html">Cadastrar</a>
-          </button>
-        </form>
-      </div>
-    </div>
+        </fieldset>
+      </form>
+
+      <p class="text-body-register mt-3 mb-3">
+        <a href="index.html">Quero me cadastrar!</a>
+      </p>
+    </main>
 
     <footer>
       <p class="copyright">
