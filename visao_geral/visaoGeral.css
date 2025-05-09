@@ -46,3 +46,18 @@ body {
 .tab-inactive:hover {
   text-decoration: underline;
 }
+
+/* Estilo dos cards */
+.card-box {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Cor do saldo */
+.saldo {
+  color: #28a745;
+  font-weight: 500;
+}
+
