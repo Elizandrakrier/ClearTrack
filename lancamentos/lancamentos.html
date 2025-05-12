@@ -23,15 +23,17 @@
         <a href="../configurar_contas/configurarContas.html">Configurar Contas</a>
       </div>
       <div class="nav-buttons">
-        <button id="addEntradaBtn">Adicionar entrada</button>
-        <button id="addSaidaBtn">Adicionar saída</button>
+        <button id="addEntradaBtn" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#entradaModal">Adicionar entrada</button>
+        <button id="addSaidaBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saidaModal">Adicionar
+          saída</button>
       </div>
     </div>
     <div class="filters">
-      <button class="filter-btn active">Todos</button>
-      <button class="filter-btn">Contas</button>
-      <button class="filter-btn">Investimentos</button>
-      <button class="filter-btn">Cartão de crédito</button>
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="contas">Contas</button>
+      <button class="filter-btn" data-filter="investimentos">Investimentos</button>
+      <button class="filter-btn" data-filter="cartao">Cartão de crédito</button>
       <div class="dropdown">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dateFilterDropdown"
           data-bs-toggle="dropdown" aria-expanded="false">
@@ -84,20 +86,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>00/00/0000</td>
-            <td>Nome do lançamento</td>
-            <td>Conta</td>
-            <td style="color: var(--green);">R$ 0</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>00/00/0000</td>
-            <td>Nome do lançamento</td>
-            <td>Conta</td>
-            <td style="color: var(--red);">R$ 0</td>
-            <td></td>
-          </tr>
+          <!-- A tabela será preenchida dinamicamente via JavaScript -->
         </tbody>
       </table>
       <div id="message" class="message"></div>
@@ -129,6 +118,7 @@
                 <option value="Conta 1">Conta 1</option>
                 <option value="Conta 2">Conta 2</option>
                 <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Investimentos">Investimentos</option>
               </select>
             </div>
             <div class="form-group">
@@ -170,6 +160,7 @@
                 <option value="Conta 1">Conta 1</option>
                 <option value="Conta 2">Conta 2</option>
                 <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Investimentos">Investimentos</option>
               </select>
             </div>
             <div class="form-group">

@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const addEntradaBtn = document.getElementById('addEntradaBtn');
     const valorInput = document.getElementById('valor');
     const entradaValorInput = document.getElementById('entradaValor');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Carregar lançamentos do localStorage (persistência local)
+    let lancamentos = JSON.parse(localStorage.getItem('lancamentos')) || [];
+    let currentFilter = 'todos'; // Filtro inicial
+    updateTable(); // Renderizar os dados salvos ao carregar a página
 
     // Abrir modal ao clicar em "Adicionar saída"
     addSaidaBtn.addEventListener('click', () => {
@@ -72,29 +78,49 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     };
 
-    // Função para enviar os dados ao back-end JSP (Saída)
+    // Função para atualizar a tabela com os lançamentos
+    const updateTable = () => {
+        tableBody.innerHTML = ''; // Limpa a tabela atual
+        const filteredLancamentos = lancamentos.filter(item => {
+            if (currentFilter === 'todos') return true;
+            if (currentFilter === 'contas') return item.conta === 'Conta 1' || item.conta === 'Conta 2';
+            if (currentFilter === 'investimentos') return item.conta === 'Investimentos';
+            if (currentFilter === 'cartao') return item.conta === 'Cartão de Crédito';
+            return false;
+        });
+
+        filteredLancamentos.forEach(item => {
+            const row = document.createElement('tr');
+            const formattedValor = parseFloat(item.valor).toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+            });
+            row.innerHTML = `
+                <td>${item.data}</td>
+                <td>${item.descricao}</td>
+                <td>${item.conta}</td>
+                <td style="color: ${item.tipo === 'entrada' ? 'var(--green)' : 'var(--red)'};">${formattedValor}</td>
+                <td></td>
+            `;
+            tableBody.appendChild(row);
+        });
+    };
+
+    // Função para enviar os dados ao back-end JSP (Saída) - Simulação
     const sendSaidaToBackend = (saidaData) => {
         console.log('Enviando saída ao back-end JSP:', saidaData);
-        /*
-        fetch('/salvarSaida.jsp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams(saidaData).toString(),
-        })
-            .then(response => response.text())
-            .then(data => {
-                showMessage('Saída salva com sucesso!', 'success');
-                saidaForm.reset();
-                valorInput.value = '';
-                saidaModal.hide();
-            })
-            .catch(error => {
-                showMessage('Erro ao salvar saída. Tente novamente.', 'error');
-                console.error('Erro ao enviar saída ao JSP:', error);
-            });
-        */
+        // Simulação: Adiciona os dados à lista de lançamentos
+        lancamentos.push({
+            ...saidaData,
+            tipo: 'saida',
+        });
+        localStorage.setItem('lancamentos', JSON.stringify(lancamentos)); // Salva no localStorage
+        updateTable(); // Atualiza a tabela imediatamente
+        showMessage('Saída salva com sucesso!', 'success');
+        saidaForm.reset();
+        valorInput.value = '';
+        saidaModal.hide();
     };
 
     // Lógica de validação e envio do formulário (Saída)
@@ -112,9 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Formatar a data para o formato dd/mm/aaaa
+        const [year, month, day] = data.split('-');
+        const formattedData = `${day}/${month}/${year}`;
+
         const saidaData = {
             descricao,
-            data,
+            data: formattedData,
             conta,
             valor: valor.toFixed(2),
         };
@@ -122,29 +152,20 @@ document.addEventListener('DOMContentLoaded', () => {
         sendSaidaToBackend(saidaData);
     });
 
-    // Função para enviar os dados ao back-end JSP (Entrada)
+    // Função para enviar os dados ao back-end JSP (Entrada) - Simulação
     const sendEntradaToBackend = (entradaData) => {
         console.log('Enviando entrada ao back-end JSP:', entradaData);
-        /*
-        fetch('/salvarEntrada.jsp', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams(entradaData).toString(),
-        })
-            .then(response => response.text())
-            .then(data => {
-                showMessage('Entrada salva com sucesso!', 'success');
-                entradaForm.reset();
-                entradaValorInput.value = '';
-                entradaModal.hide();
-            })
-            .catch(error => {
-                showMessage('Erro ao salvar entrada. Tente novamente.', 'error');
-                console.error('Erro ao enviar entrada ao JSP:', error);
-            });
-        */
+        // Simulação: Adiciona os dados à lista de lançamentos
+        lancamentos.push({
+            ...entradaData,
+            tipo: 'entrada',
+        });
+        localStorage.setItem('lancamentos', JSON.stringify(lancamentos)); // Salva no localStorage
+        updateTable(); // Atualiza a tabela imediatamente
+        showMessage('Entrada salva com sucesso!', 'success');
+        entradaForm.reset();
+        entradaValorInput.value = '';
+        entradaModal.hide();
     };
 
     // Lógica de validação e envio do formulário (Entrada)
@@ -162,9 +183,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Formatar a data para o formato dd/mm/aaaa
+        const [year, month, day] = data.split('-');
+        const formattedData = `${day}/${month}/${year}`;
+
         const entradaData = {
             descricao,
-            data,
+            data: formattedData,
             conta,
             valor: valor.toFixed(2),
         };
@@ -172,7 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
         sendEntradaToBackend(entradaData);
     });
 
-    // Função para atualizar o texto do botão de filtro
+    // Lógica para os botões de filtro
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove a classe active de todos os botões
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Adiciona a classe active ao botão clicado
+            button.classList.add('active');
+            // Atualiza o filtro atual
+            currentFilter = button.getAttribute('data-filter');
+            // Atualiza a tabela com base no filtro
+            updateTable();
+        });
+    });
+
+    // Função para atualizar o texto do botão de filtro de data
     const updateButtonText = (text) => {
         dropdownButton.querySelector('.subtitle-1').textContent = text;
         dropdownButton.classList.add('selected');
@@ -198,27 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
         */
     };
 
-    // Função para atualizar a tabela (placeholder)
-    const updateTable = (data) => {
-        console.log('Atualizando tabela com:', data);
-        /*
-        const parsedData = JSON.parse(data);
-        tableBody.innerHTML = '';
-        parsedData.forEach(item => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${item.data}</td>
-            <td>${item.descricao}</td>
-            <td>${item.conta}</td>
-            <td style="color: ${item.valor >= 0 ? 'var(--green)' : 'var(--red)'};">${item.valor}</td>
-            <td></td>
-          `;
-          tableBody.appendChild(row);
-        });
-        */
-    };
-
-    // Capturar cliques nos itens do dropdown
+    // Capturar cliques nos itens do dropdown de data
     dropdownMenu.addEventListener('click', (e) => {
         const target = e.target;
         if (target.classList.contains('dropdown-item')) {

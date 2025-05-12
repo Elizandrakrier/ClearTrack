@@ -93,7 +93,7 @@ body {
   gap: 10px;
 }
 
-.nav-buttons button {
+.nav-buttons .btn {
   background-color: var(--red);
   color: #fff;
   border: none;
@@ -104,7 +104,7 @@ body {
   font-weight: bold;
 }
 
-.nav-buttons button:hover {
+.nav-buttons .btn:hover {
   background-color: #e03e4d;
 }
 
@@ -119,17 +119,24 @@ body {
 }
 
 .filters .filter-btn {
-  background-color: var(--red);
-  color: #fff;
+  background-color: #ddd;
+  color: var(--unnamed-color-0f1923);
   border: none;
   padding: 5px 10px;
   border-radius: 15px;
   cursor: pointer;
   font-size: var(--unnamed-font-size-16);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .filters .filter-btn.active {
+  background-color: var(--red);
+  color: #fff;
+}
+
+.filters .filter-btn:hover {
   background-color: #e03e4d;
+  color: #fff;
 }
 
 /* Estilos do Dropdown Unificado */
@@ -229,14 +236,6 @@ th {
 
 td {
   color: var(--unnamed-color-0f1923);
-}
-
-td:nth-child(4) {
-  color: var(--green);
-}
-
-td:nth-child(4):nth-child(odd) {
-  color: var(--red);
 }
 
 td:last-child {
