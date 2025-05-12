@@ -46,3 +46,18 @@ body {
 .tab-inactive:hover {
   text-decoration: underline;
 }
+
+/* Cartões da lista */
+.list-group-item {
+  background-color: #f4f3f2;
+  border: none;
+  border-radius: 0;
+  padding: 16px;
+  font-weight: 500;
+}
+
+.list-group-item .menu {
+  cursor: pointer;
+  font-weight: bold;
+  color: #444;
+}
