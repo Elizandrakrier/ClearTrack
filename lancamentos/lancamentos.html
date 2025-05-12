@@ -1,48 +1,181 @@
 ﻿<!DOCTYPE html>
-<html lang="pt-br" data-bs-theme="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="pt-br">
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="lancamentos.css" />
+  <title>Lets Sign - Lançamentos</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="lancamentos.js" defer></script>
+</head>
 
-    <link rel="stylesheet" href="lancamentos.css" />
+<body>
+  <div class="container-fluid p-0">
+    <div class="navbar">
+      <div class="nav-links">
+        <a href="../visao_geral/visaoGeral.html">Nome da empresa</a>
+        <a href="../visao_geral/visaoGeral.html">Visão geral</a>
+        <a href="lancamentos.html" class="active">Lançamentos</a>
+        <a href="../configurar_contas/configurarContas.html">Configurar Contas</a>
+      </div>
+      <div class="nav-buttons">
+        <button id="addEntradaBtn" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#entradaModal">Adicionar entrada</button>
+        <button id="addSaidaBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#saidaModal">Adicionar
+          saída</button>
+      </div>
+    </div>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="contas">Contas</button>
+      <button class="filter-btn" data-filter="investimentos">Investimentos</button>
+      <button class="filter-btn" data-filter="cartao">Cartão de crédito</button>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dateFilterDropdown"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <span class="subtitle-1">Filtrar por Data</span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dateFilterDropdown">
+          <li>
+            <h6 class="dropdown-header">Meses de 2025</h6>
+          </li>
+          <li><a class="dropdown-item" href="#" data-value="Janeiro">Janeiro</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Fevereiro">Fevereiro</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Março">Março</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Abril">Abril</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Maio">Maio</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Junho">Junho</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Julho">Julho</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Agosto">Agosto</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Setembro">Setembro</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Outubro">Outubro</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Novembro">Novembro</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Dezembro">Dezembro</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <h6 class="dropdown-header">Períodos Predefinidos</h6>
+          </li>
+          <li><a class="dropdown-item" href="#" data-value="Últimos 30 dias">Últimos 30 dias</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Últimos 60 dias">Últimos 60 dias</a></li>
+          <li><a class="dropdown-item" href="#" data-value="Últimos 90 dias">Últimos 90 dias</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li>
+            <h6 class="dropdown-header">Data Personalizada</h6>
+          </li>
+          <li><input type="date" class="form-control mt-2" id="customDate" placeholder="Selecione uma data"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Conta</th>
+            <th>Valor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- A tabela será preenchida dinamicamente via JavaScript -->
+        </tbody>
+      </table>
+      <div id="message" class="message"></div>
+    </div>
+  </div>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&family=Roboto:wght@100&display=swap"
-      rel="stylesheet"
-    />
-
-    <title>Clear Track - Lançamentos</title>
-  </head>
-
-  <body class="d-flex align-items-center py-4 bg-body-tertiary">
-    <div class="container py-4">
-      <div
-        class="container py-3 px-4 d-flex align-items-center gap-4 flex-wrap"
-      >
-        <div class="d-flex align-items-center gap-4 flex-wrap">
-          <h5 class="fw-bold m-0">Clear Track</h5>
-
-          <nav class="d-flex gap-2">
-            <a href="../visao_geral/visaoGeral.html" class="nav-tab"
-              >Visão geral</a
-            >
-            <a href="#" class="nav-tab active">Lançamentos</a>
-            <a href="../configurar_contas/configurarContas.html" class="nav-tab"
-              >Configurar Contas</a
-            >
-          </nav>
+  <!-- Modal para Nova Saída -->
+  <div class="modal fade" id="saidaModal" tabindex="-1" aria-labelledby="saidaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="saidaModalLabel">Nova Saída</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="saidaForm" class="saida-form">
+            <div class="form-group">
+              <label for="descricao">Descrição</label>
+              <input type="text" id="descricao" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="data">Data</label>
+              <input type="date" id="data" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="conta">Conta</label>
+              <select id="conta" class="form-control" required>
+                <option value="">Selecione uma conta</option>
+                <option value="Conta 1">Conta 1</option>
+                <option value="Conta 2">Conta 2</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Investimentos">Investimentos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="valor">Valor (R$)</label>
+              <input type="text" id="valor" class="form-control" placeholder="R$ 0,00" required />
+            </div>
+            <div class="form-buttons">
+              <button type="submit" class="btn-submit">Salvar Saída</button>
+              <button type="button" class="btn-cancel" data-bs-dismiss="modal">Voltar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  </div>
+
+  <!-- Modal para Nova Entrada -->
+  <div class="modal fade" id="entradaModal" tabindex="-1" aria-labelledby="entradaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="entradaModalLabel">Nova Entrada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="entradaForm" class="saida-form">
+            <div class="form-group">
+              <label for="entradaDescricao">Descrição</label>
+              <input type="text" id="entradaDescricao" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="entradaData">Data</label>
+              <input type="date" id="entradaData" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="entradaConta">Conta</label>
+              <select id="entradaConta" class="form-control" required>
+                <option value="">Selecione uma conta</option>
+                <option value="Conta 1">Conta 1</option>
+                <option value="Conta 2">Conta 2</option>
+                <option value="Cartão de Crédito">Cartão de Crédito</option>
+                <option value="Investimentos">Investimentos</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="entradaValor">Valor (R$)</label>
+              <input type="text" id="entradaValor" class="form-control" placeholder="R$ 0,00" required />
+            </div>
+            <div class="form-buttons">
+              <button type="submit" class="btn-submit">Salvar Entrada</button>
+              <button type="button" class="btn-cancel" data-bs-dismiss="modal">Voltar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>
