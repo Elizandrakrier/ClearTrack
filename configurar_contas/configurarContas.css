@@ -61,3 +61,13 @@ body {
   font-weight: bold;
   color: #444;
 }
+
+.btn-danger-custom {
+    background-color: #FF4655;
+    color: white;
+    border: none;
+}
+
+.btn-danger-custom:hover {
+    background-color: #FF4655;
+}
