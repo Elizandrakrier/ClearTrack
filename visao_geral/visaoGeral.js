@@ -1,32 +1,46 @@
 ﻿document.addEventListener('DOMContentLoaded', () => {
-  const dados = JSON.parse(localStorage.getItem('lancamentos')) || []
+  const contasVisao = document.getElementById('lista-contas')
+  const investimentosVisao = document.getElementById('lista-investimentos')
+  const cartoesVisao = document.getElementById('lista-cartoes')
 
-  const tipos = {
-    conta: document.getElementById('lista-contas'),
-    investimento: document.getElementById('lista-investimentos'),
-    cartao: document.getElementById('lista-cartoes')
+  const lancamentos = JSON.parse(localStorage.getItem('lancamentos')) || []
+  const contasSalvas = JSON.parse(localStorage.getItem('contas')) || []
+
+  const getTipoConta = nomeConta => {
+    const conta = contasSalvas.find(c => c.nome === nomeConta)
+    return conta ? conta.tipo : 'conta'
+  }
+  const totais = {
+    contas: 0,
+    investimentos: 0,
+    cartao: 0
   }
 
-  // Agrupa os saldos por conta e tipo
-  const resumo = {}
+  lancamentos.forEach(item => {
+    const valor = parseFloat(item.valor)
+    const tipo = item.tipo
+    const categoria = item.conta.toLowerCase()
 
-  dados.forEach(l => {
-    const chave = l.tipo + ':' + l.conta
-    if (!resumo[chave]) {
-      resumo[chave] = { nome: l.conta, tipo: l.tipo, valor: 0 }
+    if (categoria === 'cartão de crédito') {
+      totais.cartao += tipo === 'entrada' ? valor : -valor
+    } else if (categoria === 'investimentos') {
+      totais.investimentos += tipo === 'entrada' ? valor : -valor
+    } else {
+      totais.contas += tipo === 'entrada' ? valor : -valor
     }
-    resumo[chave].valor += parseFloat(l.valor)
   })
 
-  // Preenche cada card
-  Object.values(tipos).forEach(el => (el.innerHTML = ''))
+  const formatar = valor => {
+    return `R$ ${valor.toFixed(2).replace('.', ',')}`
+  }
 
-  Object.values(resumo).forEach(item => {
-    const div = document.createElement('div')
-    div.classList.add('d-flex', 'justify-content-between')
-    div.innerHTML = `<span>${
-      item.nome
-    }</span><span class="saldo">R$ ${item.valor.toFixed(2)}</span>`
-    tipos[item.tipo].appendChild(div)
-  })
+  contasVisao.innerHTML = `<span class="saldo">${formatar(
+    totais.contas
+  )}</span>`
+  investimentosVisao.innerHTML = `<span class="saldo">${formatar(
+    totais.investimentos
+  )}</span>`
+  cartoesVisao.innerHTML = `<span class="saldo">${formatar(
+    totais.cartao
+  )}</span>`
 })
