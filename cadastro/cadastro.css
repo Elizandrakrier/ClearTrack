@@ -1,12 +1,12 @@
 ﻿:root {
-  --primary-color: #FF4655;
+  --primary-color: #A4C5C9;
   --text-color: #333333;
   --background-color: #f8f9fa;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--primary-color);
+  background-color: #f4f3f2;
   color: var(--text-color);
   min-height: 100vh;
   display: flex;
@@ -20,14 +20,22 @@ body {
   border-radius: 10px;
 }
 
-.logo-home-login{
-display: block;
+.logo-home {
+  display: block;
   margin: 0 auto 1rem;
 }
 
-.title{
+.title {
   text-align: center;
-  margin-top: 30px;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.frase-logo {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .form-floating {
@@ -50,46 +58,33 @@ legend {
 }
 
 .form-check-input:checked {
-  background-color: var(--primary-color);
+  background-color: #FF4655;
   border-color: var(--primary-color);
 }
 
-.btn-entrar{
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  border-radius: 6px;
+.btn-primary {
+  background-color: #FF4655;
+  border-color: #FF4655;
 }
 
-.btn-entrar:hover, .btn-entrar:focus {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0F19230D;
+  border-color: #0F19230D;
 }
 
-.btn-entrar a {
+.btn a {
   color: var(--background-color);
   text-decoration: none;
   font-weight: bold;
 }
 
-.text-body-register a {
+.text-body-secondary a {
   color: var(--text-color);
   text-decoration: none;
 }
 
-.text-body-register a:hover {
+.text-body-secondary a:hover {
   text-decoration: underline;
-}
-
-footer {
-  margin-top: auto;
-  text-align: center;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.copyright {
-  font-size: 0.8rem;
-  color: #666;
 }
 
 @media (max-width: 576px) {
